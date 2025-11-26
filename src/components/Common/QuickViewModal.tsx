@@ -62,9 +62,8 @@ const QuickViewModal = () => {
 
   return (
     <div
-      className={`${
-        isModalOpen ? "z-99999" : "hidden"
-      } fixed top-0 left-0 overflow-y-auto no-scrollbar w-full h-screen sm:py-20 xl:py-25 2xl:py-[230px] bg-dark/70 sm:px-8 px-4 py-5`}
+      className={`${isModalOpen ? "z-99999" : "hidden"
+        } fixed top-0 left-0 overflow-y-auto no-scrollbar w-full h-screen sm:py-20 xl:py-25 2xl:py-[230px] bg-dark/70 sm:px-8 px-4 py-5`}
     >
       <div className="flex items-center justify-center ">
         <div className="w-full max-w-[1100px] rounded-xl shadow-3 bg-white p-7.5 relative modal-content">
@@ -98,9 +97,8 @@ const QuickViewModal = () => {
                     <button
                       onClick={() => setActivePreview(key)}
                       key={key}
-                      className={`flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg bg-gray-1 ease-out duration-200 hover:border-2 hover:border-blue ${
-                        activePreview === key && "border-2 border-blue"
-                      }`}
+                      className={`flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg bg-gray-1 ease-out duration-200 hover:border-2 hover:border-blue ${activePreview === key && "border-2 border-blue"
+                        }`}
                     >
                       <Image
                         src={img || ""}
@@ -137,12 +135,14 @@ const QuickViewModal = () => {
                       </svg>
                     </button>
 
-                    <Image
-                      src={product?.imgs?.previews?.[activePreview]}
-                      alt="products-details"
-                      width={400}
-                      height={400}
-                    />
+                    {product?.imgs?.previews?.[activePreview] && (
+                      <Image
+                        src={product.imgs.previews[activePreview]}
+                        alt="products-details"
+                        width={400}
+                        height={400}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
