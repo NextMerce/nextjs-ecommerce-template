@@ -23,3 +23,8 @@ While NextMerce Pro features advanced functionalities, seamless integration, and
 #### [🚀 Live Demo](https://demo.nextmerce.com/)
 
 #### [🌐 Visit Website](https://nextmerce.com/)
+
+## Update Logs
+
+Version 0.1.2 - [Mar 16, 2026]
+- Update Next.js, React, and React DOM dependencies, add baseline-browser-mapping
