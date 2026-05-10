@@ -43,7 +43,7 @@ const ShopDetailsByHandlePage = async ({ params }: PageProps) => {
   // remains as-is per the directive's "don't restructure components" rule.
   return (
     <main>
-      <ShopDetails />
+      <ShopDetails initialProduct={product} />
     </main>
   );
 };

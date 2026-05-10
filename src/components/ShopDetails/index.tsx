@@ -6,11 +6,39 @@ import Newsletter from "../Common/Newsletter";
 import RecentlyViewdItems from "./RecentlyViewd";
 import { usePreviewSlider } from "@/app/context/PreviewSliderContext";
 import { useAppSelector } from "@/redux/store";
+import { selectCurrencyCode } from "@/redux/features/cart-slice";
+import type { StorefrontProduct } from "@/lib/medusa/types";
 
-const ShopDetails = () => {
+/**
+ * Format a number as a currency string in the cart's active currency.
+ * Falls back to a plain "<amount> <CODE>" rendering when the runtime can't
+ * format the supplied currency (some BCP-47 environments lack BDT data).
+ */
+const formatMoney = (amount: number, currency: string) => {
+  try {
+    return new Intl.NumberFormat(undefined, {
+      style: "currency",
+      currency: (currency || "usd").toUpperCase(),
+    }).format(amount);
+  } catch {
+    return `${amount.toFixed(2)} ${(currency || "usd").toUpperCase()}`;
+  }
+};
+
+type ShopDetailsProps = {
+  /**
+   * Live product fetched server-side. When provided this is the source of
+   * truth; otherwise the component falls back to the previously persisted
+   * product in localStorage (the legacy "/shop-details" demo flow).
+   */
+  initialProduct?: StorefrontProduct;
+};
+
+const ShopDetails = ({ initialProduct }: ShopDetailsProps = {}) => {
   const [activeColor, setActiveColor] = useState("blue");
   const { openPreviewModal } = usePreviewSlider();
   const [previewImg, setPreviewImg] = useState(0);
+  const currencyCode = useAppSelector(selectCurrencyCode);
 
   const [storage, setStorage] = useState("gb128");
   const [type, setType] = useState("active");
@@ -75,15 +103,35 @@ const ShopDetails = () => {
 
   const colors = ["red", "blue", "orange", "pink", "purple"];
 
-  const alreadyExist = localStorage.getItem("productDetails");
   const productFromStorage = useAppSelector(
     (state) => state.productDetailsReducer.value
   );
 
-  const product = alreadyExist ? JSON.parse(alreadyExist) : productFromStorage;
+  // Source of truth: initialProduct prop (server-fetched, current handle) >
+  // localStorage cache (last-clicked product) > Redux fallback. This keeps
+  // direct visits to /shop-details/<handle> working even with no localStorage
+  // entry, while still letting the legacy "click a card -> shop-details" flow
+  // survive a refresh on the no-handle URL.
+  const [storedProduct, setStoredProduct] = useState<typeof productFromStorage>(
+    productFromStorage
+  );
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const cached = window.localStorage.getItem("productDetails");
+    if (cached) {
+      try {
+        setStoredProduct(JSON.parse(cached));
+      } catch {
+        /* ignore corrupted cache */
+      }
+    }
+  }, []);
+
+  const product = (initialProduct ?? storedProduct) as typeof productFromStorage;
 
   useEffect(() => {
-    localStorage.setItem("productDetails", JSON.stringify(product));
+    if (typeof window === "undefined" || !product) return;
+    window.localStorage.setItem("productDetails", JSON.stringify(product));
   }, [product]);
 
   // pass the product here when you get the real data.
@@ -95,7 +143,7 @@ const ShopDetails = () => {
     <>
       <Breadcrumb title={"Shop Details"} pages={["shop details"]} />
 
-      {product.title === "" ? (
+      {!product || product.title === "" ? (
         "Please add product"
       ) : (
         <>
@@ -140,7 +188,7 @@ const ShopDetails = () => {
 
                   {/* ?  &apos;border-blue &apos; :  &apos;border-transparent&apos; */}
                   <div className="flex flex-wrap sm:flex-nowrap gap-4.5 mt-6">
-                    {product.imgs?.thumbnails.map((item, key) => (
+                    {(product.imgs?.thumbnails ?? []).map((item, key) => (
                       <button
                         onClick={() => setPreviewImg(key)}
                         key={key}
@@ -316,12 +364,13 @@ const ShopDetails = () => {
 
                   <h3 className="font-medium text-custom-1 mb-4.5">
                     <span className="text-sm sm:text-base text-dark">
-                      Price: ${product.price}
+                      Price: {formatMoney(product.discountedPrice ?? product.price, currencyCode)}
                     </span>
-                    <span className="line-through">
-                      {" "}
-                      ${product.discountedPrice}{" "}
-                    </span>
+                    {product.price > (product.discountedPrice ?? product.price) ? (
+                      <span className="line-through ml-2 text-dark-4">
+                        {formatMoney(product.price, currencyCode)}
+                      </span>
+                    ) : null}
                   </h3>
 
                   <ul className="flex flex-col gap-2">
