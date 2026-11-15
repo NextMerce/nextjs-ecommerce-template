@@ -26,5 +26,11 @@ While NextMerce Pro features advanced functionalities, seamless integration, and
 
 ## Update Logs
 
+Version 0.1.3 - [Nov 15, 2026]
+- upgrade dependencies
+- migrate tailwind css v3 to v4
+- replace autoprefixer and tailwindcss postcss plugins with @tailwindcss/postcss
+- remove tailwind.config.ts in favor of css-based configuration
+
 Version 0.1.2 - [Mar 16, 2026]
 - Update Next.js, React, and React DOM dependencies, add baseline-browser-mapping
