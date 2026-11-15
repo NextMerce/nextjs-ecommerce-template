@@ -33,7 +33,7 @@ const CustomSelect = ({ options }) => {
 
   return (
     <div
-      className="custom-select custom-select-2 flex-shrink-0 relative"
+      className="custom-select custom-select-2 shrink-0 relative"
       ref={selectRef}
     >
       <div

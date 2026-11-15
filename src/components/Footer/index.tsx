@@ -16,7 +16,7 @@ const Footer = () => {
 
             <ul className="flex flex-col gap-3">
               <li className="flex gap-4.5">
-                <span className="flex-shrink-0">
+                <span className="shrink-0">
                   <svg
                     width="24"
                     height="24"

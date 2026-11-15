@@ -1,6 +1,192 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= theme(--breakpoint-sm)) {
+    padding-inline: 2rem;
+  }
+  @media (width >= theme(--breakpoint-xl)) {
+    padding-inline: 0;
+  }
+}
+
+@theme {
+  --font-*: initial;
+  --font-euclid-circular-a: Euclid Circular A;
+
+  --color-*: initial;
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  --color-body: #6c6f93;
+
+  --color-meta-2: #495270;
+  --color-meta-3: #606882;
+  --color-meta-4: #8d93a5;
+  --color-meta-5: #bbbec9;
+  --color-meta: #f7f9fc;
+
+  --color-dark-2: #495270;
+  --color-dark-3: #606882;
+  --color-dark-4: #8d93a5;
+  --color-dark-5: #bbbec9;
+  --color-dark: #1c274c;
+
+  --color-gray-1: #f9fafb;
+  --color-gray-2: #f3f4f6;
+  --color-gray-3: #e5e7eb;
+  --color-gray-4: #d1d5db;
+  --color-gray-5: #9ca3af;
+  --color-gray-6: #6b7280;
+  --color-gray-7: #374151;
+  --color-gray: #f3f5f6;
+
+  --color-blue: #3c50e0;
+  --color-blue-dark: #1c3fb7;
+  --color-blue-light: #5475e5;
+  --color-blue-light-2: #8099ec;
+  --color-blue-light-3: #adbcf2;
+  --color-blue-light-4: #c3cef6;
+  --color-blue-light-5: #e1e8ff;
+
+  --color-red: #f23030;
+  --color-red-dark: #e10e0e;
+  --color-red-light: #f56060;
+  --color-red-light-2: #f89090;
+  --color-red-light-3: #fbc0c0;
+  --color-red-light-4: #fdd8d8;
+  --color-red-light-5: #feebeb;
+  --color-red-light-6: #fef3f3;
+
+  --color-green: #22ad5c;
+  --color-green-dark: #1a8245;
+  --color-green-light: #2cd673;
+  --color-green-light-2: #57de8f;
+  --color-green-light-3: #82e6ac;
+  --color-green-light-4: #acefc8;
+  --color-green-light-5: #c2f3d6;
+  --color-green-light-6: #daf8e6;
+
+  --color-yellow: #fbbf24;
+  --color-yellow-dark: #f59e0b;
+  --color-yellow-dark-2: #d97706;
+  --color-yellow-light: #fcd34d;
+  --color-yellow-light-1: #fde68a;
+  --color-yellow-light-2: #fef3c7;
+  --color-yellow-light-4: #fffbeb;
+
+  --color-teal: #02aaa4;
+  --color-teal-dark: #06a09b;
+
+  --color-orange: #f27430;
+  --color-orange-dark: #e1580e;
+
+  --breakpoint-*: initial;
+  --breakpoint-xsm: 375px;
+  --breakpoint-lsm: 425px;
+  --breakpoint-3xl: 2000px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --text-2xs: 10px;
+  --text-2xs--line-height: 17px;
+  --text-heading-1: 60px;
+  --text-heading-1--line-height: 72px;
+  --text-heading-2: 48px;
+  --text-heading-2--line-height: 64px;
+  --text-heading-3: 40px;
+  --text-heading-3--line-height: 48px;
+  --text-heading-4: 30px;
+  --text-heading-4--line-height: 38px;
+  --text-heading-5: 28px;
+  --text-heading-5--line-height: 40px;
+  --text-heading-6: 24px;
+  --text-heading-6--line-height: 30px;
+  --text-custom-xl: 20px;
+  --text-custom-xl--line-height: 24px;
+  --text-custom-lg: 18px;
+  --text-custom-lg--line-height: 24px;
+  --text-custom-sm: 14px;
+  --text-custom-sm--line-height: 22px;
+  --text-custom-xs: 12px;
+  --text-custom-xs--line-height: 20px;
+  --text-custom-2xl: 24px;
+  --text-custom-2xl--line-height: 34px;
+  --text-custom-4xl: 36px;
+  --text-custom-4xl--line-height: 48px;
+  --text-custom-1: 22px;
+  --text-custom-1--line-height: 30px;
+  --text-custom-2: 32px;
+  --text-custom-2--line-height: 38px;
+  --text-custom-3: 35px;
+  --text-custom-3--line-height: 45px;
+
+  --container-30: 7.5rem;
+  --container-40: 10rem;
+  --container-50: 12.5rem;
+
+  --z-index-1: 1;
+  --z-index-99: 99;
+  --z-index-999: 999;
+  --z-index-9999: 9999;
+  --z-index-99999: 99999;
+  --z-index-999999: 999999;
+
+  --shadow-1: 0px 1px 2px 0px rgba(166, 175, 195, 0.25);
+  --shadow-2:
+    0px 6px 24px 0px rgba(235, 238, 251, 0.4),
+    0px 2px 4px 0px rgba(148, 163, 184, 0.05);
+  --shadow-3: 0px 2px 16px 0px rgba(13, 10, 44, 0.12);
+  --shadow-testimonial:
+    0px 0px 4px 0px rgba(148, 163, 184, 0.1),
+    0px 6px 12px 0px rgba(224, 227, 238, 0.45);
+  --shadow-breadcrumb: 0px 1px 0px 0px #e5e7eb, 0px -1px 0px 0px #e5e7eb;
+  --shadow-range:
+    0px 0px 1px 0px rgba(33, 37, 41, 0.08),
+    0px 2px 2px 0px rgba(33, 37, 41, 0.06);
+  --shadow-filter: 0px 1px 0px 0px #e5e7eb;
+  --shadow-list: 1px 0px 0px 0px #e5e7eb;
+  --shadow-input: inset 0 0 0 2px #3c50e0;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility dropdown {
+  @apply flex-col gap-0 min-w-max xl:w-[193px] mt-2 lg:mt-0 bg-white shadow-2 ease-in duration-200 py-2.5 rounded-md border border-gray-3 left-0 hidden
+    xl:translate-y-10 xl:opacity-0 xl:invisible xl:absolute xl:flex
+    xl:group-hover:opacity-100 xl:group-hover:visible;
+}
+
+@utility no-scrollbar {
+  /* Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 @layer base {
   html {
@@ -9,26 +195,6 @@
 
   body {
     @apply font-euclid-circular-a font-normal text-base text-dark-3 relative z-1;
-  }
-}
-
-@layer components {
-  .dropdown {
-    @apply flex-col gap-0 min-w-max xl:w-[193px] mt-2 lg:mt-0 bg-white shadow-2 ease-in duration-200 py-2.5 rounded-md border border-gray-3 left-0 hidden
-    xl:translate-y-10 xl:opacity-0 xl:invisible xl:absolute xl:flex
-    xl:group-hover:opacity-100 xl:group-hover:visible;
-  }
-}
-
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
   }
 }
 
@@ -64,7 +230,7 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .select-selected {
-  @apply bg-gray-1 rounded-l-[5px] border border-gray-3 !border-r-0 cursor-pointer text-dark text-custom-sm py-[11px] pl-3.5 pr-8 relative;
+  @apply bg-gray-1 rounded-l-[5px] border border-gray-3 border-r-0! cursor-pointer text-dark text-custom-sm py-[11px] pl-3.5 pr-8 relative;
 }
 
 /* Style the arrow inside the select element: */
@@ -99,7 +265,7 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .custom-select-2 .select-selected {
-  @apply bg-white rounded-md !border-r text-dark-4 py-1.5 pl-3 pr-9;
+  @apply bg-white rounded-md border-r! text-dark-4 py-1.5 pl-3 pr-9;
 }
 .custom-select-2 .select-selected:after {
   content: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.41444 1.03563L1.41443 1.03565L1.41725 1.0384L6.76725 6.2634L7.00126 6.49194L7.23418 6.26229L12.5842 0.987287L12.5842 0.987293L12.5858 0.985629C12.6807 0.890804 12.8196 0.890804 12.9144 0.985629C13.009 1.08018 13.0093 1.21861 12.9153 1.31341C12.915 1.31368 12.9147 1.31395 12.9144 1.31422L7.16652 6.96217L7.16651 6.96216L7.16444 6.96422C7.06814 7.06053 7.02327 7.06659 7.00015 7.06659C6.94122 7.06659 6.89018 7.05216 6.8204 6.99902L1.08502 1.36339C0.991024 1.26859 0.991301 1.13018 1.08585 1.03563C1.18067 0.940804 1.31962 0.940804 1.41444 1.03563Z' fill='%238D93A5' stroke='%238D93A5' stroke-width='0.666667'/%3E%3C/svg%3E%0A");
@@ -107,7 +273,7 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .custom-select-common .select-selected {
-  @apply bg-gray-1 rounded-md !border-r text-dark-4 py-3 pl-5 pr-9 duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20;
+  @apply bg-gray-1 rounded-md border-r! text-dark-4 py-3 pl-5 pr-9 duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20;
 }
 .custom-select-common .select-selected:after {
   content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.41469 5.03569L2.41467 5.03571L2.41749 5.03846L7.76749 10.2635L8.0015 10.492L8.23442 10.2623L13.5844 4.98735L13.5844 4.98735L13.5861 4.98569C13.6809 4.89086 13.8199 4.89087 13.9147 4.98569C14.0092 5.08024 14.0095 5.21864 13.9155 5.31345C13.9152 5.31373 13.915 5.31401 13.9147 5.31429L8.16676 10.9622L8.16676 10.9622L8.16469 10.9643C8.06838 11.0606 8.02352 11.0667 8.00039 11.0667C7.94147 11.0667 7.89042 11.0522 7.82064 10.9991L2.08526 5.36345C1.99127 5.26865 1.99154 5.13024 2.08609 5.03569C2.18092 4.94086 2.31986 4.94086 2.41469 5.03569Z' fill='%238D93A5' stroke='%238D93A5' stroke-width='0.666667'/%3E%3C/svg%3E%0A");
@@ -127,7 +293,7 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .hero-carousel .swiper-pagination {
-  @apply xl:!bottom-5;
+  @apply xl:bottom-5!;
 }
 
 .common-carousel .swiper-button-next:after,
@@ -137,7 +303,7 @@ input[type='search']::-webkit-search-results-decoration {
 
 .common-carousel .swiper-button-next,
 .common-carousel .swiper-button-prev {
-  @apply !static h-9 w-9 rounded-lg bg-white text-dark border border-gray-3 m-0 ease-out duration-200 hover:bg-blue hover:text-white hover:border-blue;
+  @apply static! h-9 w-9 rounded-lg bg-white text-dark border border-gray-3 m-0 ease-out duration-200 hover:bg-blue hover:text-white hover:border-blue;
 }
 
 .common-carousel .swiper-button-next svg,
@@ -175,7 +341,7 @@ input[type='search']::-webkit-search-results-decoration {
 
 
 .range-slider {
- @apply w-full !h-[4px] rounded-md bg-blue relative mb-3;
+ @apply w-full h-[4px]! rounded-md bg-blue relative mb-3;
 }
 
 .slider .thumb {
@@ -183,7 +349,7 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .range-slider__thumb {
-  @apply !bg-white border-[1px] border-blue-light-4 flex justify-center items-center !w-7 !h-7;
+  @apply bg-white! border border-blue-light-4 flex justify-center items-center w-7! h-7!;
 }
 
 .range-slider__thumb::after {
@@ -197,5 +363,5 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .range-slider__range {
-  @apply !bg-blue;
+  @apply bg-blue!;
 }
